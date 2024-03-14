@@ -15,11 +15,11 @@ const knex = require('knex')({
 
 export async function PUT(req, { params }){
     const body = await req.json()
-    const { address , email, phone }  = body;
+    const { email , phone , address}  = body;
     const data = await knex('stores').where('id', params.id).update({
-        address : address,
         email : email,
-        phone: phone
+        phone: phone,
+        address: address
     })
     return Response.json(data)
 }
