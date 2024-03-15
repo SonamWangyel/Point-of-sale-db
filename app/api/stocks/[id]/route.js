@@ -10,17 +10,16 @@ const knex = require('knex')({
 });
 
 export async function GET(req, { params }) {
-	const data = await knex('users').where('id', params.id).select('*')
+	const data = await knex('stocks').where('id', params.id).select('*')
 	return Response.json({ data })
 }
 
 export async function PUT(req, { params }) {
 	const body = await req.json()
-	const { salary, firstName, lastName } = body;
-	const data = await knex('users').where('id', params.id).update({
-		salary: salary,
-		firstname: firstName,
-		lastname: lastName
+	const { amount, receivedDateTime } = body;
+	const data = await knex('stocks').where('id', params.id).update({
+		amount: amount,
+		received_datetime: receivedDateTime,
 	})
 	return Response.json({ data })
 }
